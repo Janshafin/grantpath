@@ -14,5 +14,6 @@
     },
     "ignoreDeprecations": "6.0"
   },
-  "include": ["**/*.ts", "**/*.tsx", "types/**/*", "index.ts"]
+  "include": ["api/**/*", "types/**/*", "index.ts", "tests/**/*.ts"],
+  "exclude": ["client/**/*", "tests/**/*.tsx"]
 }

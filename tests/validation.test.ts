@@ -6,7 +6,7 @@ import app from '../index.js'; // Ensure app is exported in index.ts
 vi.mock('../api/lib/mistralClient.js', () => ({
   getMistralClient: () => ({
     chat: {
-      stream: () => async function* () {
+      stream: async function* () {
         yield { choices: [{ delta: { content: 'Drafted essay.' } }] };
       },
       complete: async () => ({

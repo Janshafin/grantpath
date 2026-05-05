@@ -50,7 +50,7 @@ export function matchScholarships(scholarships: Scholarship[], query: StudentQue
 
   // ── Score and annotate ────────────────────────────────────
   const scored = matched.map(s => {
-    let score = SCORING.BASE_SCORE;
+    let score: number = SCORING.BASE_SCORE;
     const reasonParts: string[] = [];
 
     if (zipCode && s.zipCodes.includes(zipCode)) {
