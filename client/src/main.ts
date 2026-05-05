@@ -210,11 +210,11 @@ function renderResultsPage(scholarships: any[], zipCode: string) {
 
     // First, get a JWT cookie by calling /api/auth/login
     try {
-      await fetch(`${API_URL}/api/auth/login`, { method: 'POST', credentials: 'include' });
+      await fetch(`https://grantpath-rj83refrh-janshafin28csa-5309s-projects.vercel.app/api/auth/login`, { method: 'POST', credentials: 'include' });
     } catch (_) {}
 
     try {
-      const response = await fetch(`${API_URL}/api/draft`, {
+      const response = await fetch(`https://grantpath-rj83refrh-janshafin28csa-5309s-projects.vercel.app/api/draft`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -338,7 +338,7 @@ button?.addEventListener('click', async () => {
   const demographics = getCheckedDemographics();
 
   try {
-    const res = await fetch(`http://loca${'lhost:3001'}/api/find`, {
+    const res = await fetch(`https://grantpath-rj83refrh-janshafin28csa-5309s-projects.vercel.app/api/find`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ zipCode, gpa, major, demographics, extracurriculars })
