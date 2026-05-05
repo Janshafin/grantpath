@@ -13,7 +13,10 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : [`http://loca${'lhost:5173'}`, `http://loca${'lhost:5174'}`, `http://loca${'lhost:5175'}`];
+const allowedOrigins = [
+  ...(process.env.ALLOWED_ORIGINS ? process.env.ALLOWED_ORIGINS.split(',') : []),
+  `http://localhost:5173`, `http://localhost:5174`, `http://localhost:5175`, `https://client-rho-eight-23.vercel.app`
+];
 
 app.use(helmet());
 app.use(cookieParser());
