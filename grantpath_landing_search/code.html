@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GrantPath - Find Scholarships</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Newsreader:opsz,wght@6..72,500;6..72,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#291800",
+                        "on-secondary-fixed-variant": "#614000",
+                        "outline": "#707973",
+                        "secondary-fixed": "#ffddb0",
+                        "on-error-container": "#93000a",
+                        "background": "#f9f9f6",
+                        "surface-bright": "#f9f9f6",
+                        "outline-variant": "#bfc9c1",
+                        "on-tertiary-fixed-variant": "#474744",
+                        "on-tertiary-fixed": "#1c1c1a",
+                        "primary-fixed": "#aef1cd",
+                        "surface-dim": "#dadad7",
+                        "surface-container-high": "#e8e8e5",
+                        "on-surface": "#1a1c1b",
+                        "inverse-primary": "#92d4b2",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#075137",
+                        "primary-fixed-dim": "#92d4b2",
+                        "surface-tint": "#296a4e",
+                        "inverse-surface": "#2f312f",
+                        "on-primary-fixed": "#002114",
+                        "surface": "#f9f9f6",
+                        "surface-container-highest": "#e2e3e0",
+                        "on-background": "#1a1c1b",
+                        "primary": "#095238",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#404943",
+                        "secondary-fixed-dim": "#ffba47",
+                        "surface-container": "#eeeeeb",
+                        "on-secondary-container": "#6e4900",
+                        "on-primary-container": "#a6e9c6",
+                        "on-tertiary-container": "#dddad7",
+                        "tertiary-fixed-dim": "#c8c6c3",
+                        "surface-container-low": "#f4f4f1",
+                        "primary-container": "#2a6b4f",
+                        "secondary-container": "#fdb742",
+                        "tertiary-container": "#61605d",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e5e2de",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#805600",
+                        "surface-variant": "#e2e3e0",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f1f1ee",
+                        "tertiary": "#494846",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sm": "16px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "margin": "32px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Newsreader"],
+                        "h1": ["Newsreader"],
+                        "button": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Newsreader"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h3": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "h1": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "button": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "h2": ["32px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base resets for minimal-brutalism */
+        * { border-radius: 0 !important; }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1a1c1b !important;
+            box-shadow: none !important;
+        }
+        
+        /* Loading animation styles */
+        @keyframes cycleText {
+            0%, 20% { opacity: 1; content: "Searching local scholarships..."; }
+            25%, 45% { opacity: 0; content: "Searching local scholarships..."; }
+            50%, 70% { opacity: 1; content: "Checking statewide funds..."; }
+            75%, 95% { opacity: 0; content: "Checking statewide funds..."; }
+            100% { opacity: 1; content: "Calculating your matches..."; }
+        }
+        
+        @keyframes fillProgress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        .loading-text-cycler::after {
+            content: "Searching local scholarships...";
+            animation: cycleText 8s infinite;
+        }
+
+        .progress-bar-fill {
+            animation: fillProgress 4s ease-out forwards;
+        }
+        
+        /* Custom scrollbar to match aesthetic */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #f9f9f6; border-left: 1px solid #e8e8e5; }
+        ::-webkit-scrollbar-thumb { background: #dadad7; border: 1px solid #e8e8e5; }
+        ::-webkit-scrollbar-thumb:hover { background: #1a1c1b; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-6 py-4 max-w-full docked full-width top-0 border-b-2 border-[#E8E5DE] dark:border-stone-800 bg-[#FAFAF7] dark:bg-stone-950 text-[#2A6B4F] dark:text-emerald-500 z-50">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-h3" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+<span class="font-['Newsreader'] text-2xl font-black text-[#2A6B4F] dark:text-emerald-500 uppercase tracking-tighter">GrantPath</span>
+</div>
+<span class="material-symbols-outlined text-h3 hover:bg-[#2A6B4F] hover:text-white transition-colors duration-100 p-2 cursor-pointer scale-100 active:bg-stone-100" data-weight="fill">account_circle</span>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex flex-col md:flex-row min-h-[calc(100vh-80px)]">
+<!-- Left Side: Copy -->
+<section class="w-full md:w-1/2 p-margin md:p-xl flex flex-col justify-center border-b border-surface-container-high md:border-b-0 md:border-r border-surface-container-highest">
+<div class="max-w-[600px]">
+<h1 class="font-h1 text-h1 text-on-surface mb-md">Find the money no one told you about.</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Hundreds of local scholarships go unclaimed every year — not because students don't qualify, but because they never found them. GrantPath matches you to real local grants in under 60 seconds.
+                </p>
+</div>
+</section>
+<!-- Right Side: Form & Loading State -->
+<section class="w-full md:w-1/2 p-margin md:p-xl flex flex-col justify-center bg-surface-bright relative">
+<div class="max-w-[500px] w-full mx-auto relative z-10" id="form-container">
+<form class="space-y-md">
+<div class="space-y-xs">
+<label class="font-button text-button text-on-surface block uppercase" for="zipcode">Zip code</label>
+<input class="w-full p-sm border border-surface-container-highest bg-surface-container-lowest font-body-md text-on-surface placeholder:text-outline-variant focus:border-on-surface transition-colors" id="zipcode" name="zipcode" placeholder="Your zip code" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-button text-button text-on-surface block uppercase" for="gpa">GPA</label>
+<select class="w-full p-sm border border-surface-container-highest bg-surface-container-lowest font-body-md text-on-surface focus:border-on-surface transition-colors appearance-none rounded-none" id="gpa" name="gpa">
+<option disabled="" selected="" value="">Select GPA Range</option>
+<option value="2.0-2.4">2.0–2.4</option>
+<option value="2.5-2.9">2.5–2.9</option>
+<option value="3.0-3.4">3.0–3.4</option>
+<option value="3.5-3.9">3.5–3.9</option>
+<option value="4.0+">4.0+</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-button text-button text-on-surface block uppercase" for="major">Intended major</label>
+<input class="w-full p-sm border border-surface-container-highest bg-surface-container-lowest font-body-md text-on-surface placeholder:text-outline-variant focus:border-on-surface transition-colors" id="major" name="major" placeholder="e.g. Computer Science, Nursing, Undecided" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="font-button text-button text-on-surface block uppercase">Background</label>
+<div class="flex flex-wrap gap-sm">
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="w-5 h-5 border-surface-container-highest text-primary focus:ring-0 checked:bg-primary checked:border-primary transition-colors" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface uppercase">First-generation</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="w-5 h-5 border-surface-container-highest text-primary focus:ring-0 checked:bg-primary checked:border-primary transition-colors" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface uppercase">African American</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="w-5 h-5 border-surface-container-highest text-primary focus:ring-0 checked:bg-primary checked:border-primary transition-colors" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface uppercase">Hispanic / Latino</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer group">
+<input class="w-5 h-5 border-surface-container-highest text-primary focus:ring-0 checked:bg-primary checked:border-primary transition-colors" type="checkbox"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant group-hover:text-on-surface uppercase">Female</span>
+</label>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-button text-button text-on-surface block uppercase" for="extracurriculars">Extracurriculars</label>
+<input class="w-full p-sm border border-surface-container-highest bg-surface-container-lowest font-body-md text-on-surface placeholder:text-outline-variant focus:border-on-surface transition-colors" id="extracurriculars" name="extracurriculars" placeholder="e.g. robotics club, soccer, volunteering" type="text"/>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-button text-button p-sm uppercase hover:bg-on-primary-fixed-variant transition-colors flex justify-center items-center gap-xs mt-lg" type="button">
+                        Find my scholarships
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<!-- Loading State Overlay (Simulated for visualization, typically controlled via JS) -->
+<!-- Note: In a real app this would be hidden by default. Showing it here as part of the requested design -->
+<div class="absolute inset-0 bg-surface-bright/95 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-300 z-20">
+<div class="w-full max-w-[300px] text-center space-y-md">
+<p class="font-body-lg text-body-lg text-on-surface loading-text-cycler min-h-[1.5em]"></p>
+<div class="h-[2px] w-full bg-surface-container-highest relative overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-primary-container progress-bar-fill"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>
