@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "ignoreDeprecations": "6.0"
   },
-  "include": ["api/**/*", "types/**/*", "index.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "types/**/*", "index.ts"]
 }
