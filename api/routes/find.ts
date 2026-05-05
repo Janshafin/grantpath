@@ -36,7 +36,7 @@ IMPORTANT: Output strictly a raw JSON array. Do not include markdown code blocks
 
       let textContent = "[]";
 
-      if (client.apiKey === 'dummy_key') {
+      if (!process.env.MISTRAL_API_KEY) {
         // Fallback for demo recording when no real API key is present
         await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network latency
         textContent = JSON.stringify([

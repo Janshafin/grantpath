@@ -29,17 +29,15 @@ router.post('/',
 
     const { scholarshipId, studentProfile } = req.body;
 
-    let scholarship = SCHOLARSHIPS.find(s => s.id === scholarshipId);
+    const foundScholarship = SCHOLARSHIPS.find(s => s.id === scholarshipId);
     
     // Support dynamic AI-generated scholarships for demo purposes
-    if (!scholarship) {
-      scholarship = {
-        id: scholarshipId,
-        name: "this dynamic scholarship",
-        essayPrompt: "Explain how your background and goals make you the perfect candidate for this opportunity.",
-        description: "Dynamic", amount: 0, gpaMin: 0, url: "", provider: "Dynamic"
-      };
-    }
+    const scholarship = foundScholarship || {
+      id: scholarshipId,
+      name: "this dynamic scholarship",
+      essayPrompt: "Explain how your background and goals make you the perfect candidate for this opportunity.",
+      description: "Dynamic", amount: 0, gpaMin: 0, deadline: "", zipCodes: [], statewide: false, majors: [], demographics: []
+    };
 
   try {
     const client = getMistralClient();
@@ -52,7 +50,7 @@ router.post('/',
 
     const userMessage = `Scholarship: ${scholarship.name}\nEssay prompt: ${scholarship.essayPrompt}\nStudent profile: ${JSON.stringify(studentProfile)}\nWrite the essay now.`;
 
-    if (client.apiKey === 'dummy_key') {
+    if (!process.env.MISTRAL_API_KEY) {
       // Mock streaming for demo purposes
       const chunks = [
         "Technology has always been a driving force in my life. ",
